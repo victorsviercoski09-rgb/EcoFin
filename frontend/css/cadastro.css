@@ -1,0 +1,936 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    min-height: 100vh;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    color: #173b20;
+
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.cadastro-container {
+    width: 100%;
+    min-height: 100vh;
+
+    display: flex;
+
+    margin: 0;
+    padding: 35px 45px;
+
+    gap: 45px;
+
+    background-image:
+        linear-gradient(90deg,
+            rgba(0, 0, 0, 0.18),
+            rgba(0, 0, 0, 0.02)),
+        url("../assets/fundoAutentica.jpeg");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    overflow: visible;
+}
+
+.lado-esquerdo {
+    width: 43%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+}
+
+.conteudo-esquerdo {
+    width: min(100%, 520px);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    text-align: center;
+
+    color: white;
+}
+
+.logo {
+    width: clamp(180px, 22vw, 300px);
+    max-width: 100%;
+
+    object-fit: contain;
+
+    margin-bottom: 30px;
+
+    filter: drop-shadow(0 8px 15px rgba(0, 0, 0, 0.25));
+}
+
+.conteudo-esquerdo h1 {
+    font-size: clamp(26px, 2.6vw, 38px);
+
+    line-height: 1.18;
+
+    font-weight: 700;
+
+    margin-bottom: 18px;
+
+    text-shadow:
+        0 3px 8px rgba(0, 0, 0, 0.35);
+}
+
+.conteudo-esquerdo h1 span {
+    color: #69bd35;
+}
+
+.descricao {
+    width: min(100%, 450px);
+
+    font-size: clamp(13px, 1.1vw, 17px);
+
+    line-height: 1.55;
+
+    color: rgba(255, 255, 255, 0.96);
+
+    text-shadow:
+        0 2px 6px rgba(0, 0, 0, 0.4);
+
+    margin-bottom: 40px;
+}
+
+.mensagem {
+    width: min(100%, 430px);
+
+    display: flex;
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 16px 20px;
+
+    border-radius: 20px;
+
+    background: rgba(40, 65, 38, 0.40);
+
+    border: 1px solid rgba(255, 255, 255, 0.25);
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.18);
+
+    text-align: left;
+}
+
+.icone-mensagem {
+    width: 50px;
+    height: 50px;
+
+    flex: 0 0 50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: rgba(96, 155, 68, 0.65);
+
+    border: 1px solid rgba(255, 255, 255, 0.25);
+
+    color: white;
+
+    font-size: 24px;
+}
+
+.mensagem strong {
+    font-size: clamp(14px, 1vw, 17px);
+
+    font-weight: 500;
+}
+
+.mensagem p {
+    margin-top: 4px;
+
+    font-size: clamp(12px, 0.9vw, 15px);
+
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.mensagem p span {
+    color: #76c843;
+}
+
+.lado-direito {
+    width: 57%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 10px 0;
+}
+
+.card-cadastro {
+    width: 100%;
+    max-width: 820px;
+
+    padding: 25px 50px;
+
+    border-radius: 30px;
+
+    background: rgba(255, 255, 255, 0.72);
+
+    border: 1px solid rgba(255, 255, 255, 0.75);
+
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.20);
+
+    text-align: center;
+}
+
+.icone-topo {
+    width: 62px;
+    height: 62px;
+
+    margin: 0 auto 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: rgba(110, 143, 94, 0.30);
+
+    color: #315b35;
+
+    font-size: 28px;
+}
+
+.card-cadastro h2 {
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: clamp(30px, 3vw, 40px);
+
+    font-weight: 500;
+
+    color: #153a20;
+
+    margin-bottom: 6px;
+}
+
+.ornamento {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+
+    color: #719568;
+
+    font-size: 15px;
+
+    margin-bottom: 5px;
+}
+
+.ornamento span {
+    width: 35px;
+    height: 1px;
+
+    background: #8ca983;
+}
+
+.subtitulo {
+    font-size: 15px;
+
+    color: #35453a;
+
+    margin-bottom: 18px;
+}
+
+.formulario {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 13px 18px;
+
+    text-align: left;
+}
+
+.campo {
+    width: 100%;
+
+    min-width: 0;
+}
+
+.campo-completo {
+    grid-column: 1 / -1;
+}
+
+.campo label {
+    display: block;
+
+    font-size: 14px;
+
+    font-weight: 500;
+
+    color: #17271b;
+
+    margin-bottom: 5px;
+}
+
+.input-container {
+    width: 100%;
+
+    height: 47px;
+
+    display: flex;
+    align-items: center;
+
+    border-radius: 13px;
+
+    background: rgba(255, 255, 255, 0.72);
+
+    border: 1px solid rgba(255, 255, 255, 0.9);
+
+    box-shadow:
+        inset 0 1px 2px rgba(255, 255, 255, 0.8),
+        0 3px 10px rgba(0, 0, 0, 0.04);
+
+    transition: 0.2s ease;
+}
+
+.input-container:focus-within {
+    border-color: #5a9b3c;
+
+    box-shadow:
+        0 0 0 3px rgba(77, 137, 53, 0.12);
+}
+
+.input-icone {
+    width: 45px;
+
+    flex: 0 0 45px;
+
+    display: flex;
+
+    justify-content: center;
+
+    color: #7b807d;
+
+    font-size: 18px;
+}
+
+.input-container input {
+    width: 100%;
+    height: 100%;
+
+    min-width: 0;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+
+    font-size: 14px;
+
+    color: #1d3022;
+
+    padding-right: 10px;
+}
+
+.input-container input::placeholder {
+    color: #969996;
+}
+
+.olho {
+    width: 45px;
+
+    flex: 0 0 45px;
+
+    display: flex;
+
+    justify-content: center;
+
+    color: #707571;
+
+    cursor: pointer;
+
+    font-size: 16px;
+}
+
+.termos {
+    grid-column: 1 / -1;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    font-size: 12px;
+
+    line-height: 1.4;
+
+    color: #303a32;
+
+    cursor: pointer;
+}
+
+.termos input {
+    display: none;
+}
+
+.checkmark {
+    width: 19px;
+    height: 19px;
+
+    flex: 0 0 19px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 4px;
+
+    background: #4f9a36;
+}
+
+.termos input:not(:checked)+.checkmark {
+    background: rgba(255, 255, 255, 0.65);
+
+    border: 1px solid #b7bdb8;
+}
+
+.termos input:checked+.checkmark::after {
+    content: "✓";
+
+    color: white;
+
+    font-size: 13px;
+
+    font-weight: bold;
+}
+
+.termos a {
+    color: #416f35;
+
+    text-decoration: none;
+
+    font-weight: 500;
+}
+
+.btn-cadastrar {
+    grid-column: 1 / -1;
+
+    width: 100%;
+
+    height: 48px;
+
+    border: none;
+
+    border-radius: 30px;
+
+    background: linear-gradient(90deg,
+            #4c9a31,
+            #5daa37);
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: 500;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 7px 16px rgba(63, 130, 45, 0.25);
+
+    transition: 0.2s ease;
+}
+
+.btn-cadastrar span {
+    margin-right: 8px;
+}
+
+.btn-cadastrar:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 10px 22px rgba(63, 130, 45, 0.32);
+}
+
+.divisor {
+    grid-column: 1 / -1;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+.divisor span {
+    flex: 1;
+
+    height: 1px;
+
+    background: rgba(70, 80, 72, 0.28);
+}
+
+.divisor p {
+    color: #313931;
+
+    font-size: 13px;
+}
+
+.btn-google {
+    grid-column: 1 / -1;
+
+    width: 100%;
+
+    height: 48px;
+
+    border: none;
+
+    border-radius: 30px;
+
+    background: rgba(255, 255, 255, 0.86);
+
+    color: #222;
+
+    font-size: 15px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 3px 10px rgba(0, 0, 0, 0.05);
+
+    transition: 0.2s ease;
+}
+
+.btn-google strong {
+    color: #4285f4;
+
+    font-size: 20px;
+
+    margin-right: 8px;
+}
+
+.btn-google:hover {
+    background: white;
+
+    transform: translateY(-1px);
+}
+
+.login-link {
+    grid-column: 1 / -1;
+
+    text-align: center;
+
+    font-size: 13px;
+
+    color: #333b35;
+}
+
+.login-link a {
+    color: #3f7135;
+
+    text-decoration: none;
+
+    font-weight: 500;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}
+
+@media (min-width: 851px) and (max-height: 850px) {
+
+    .cadastro-container {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    .lado-esquerdo {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .lado-direito {
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+
+    .card-cadastro {
+        padding-top: 18px;
+        padding-bottom: 18px;
+    }
+
+    .icone-topo {
+        width: 48px;
+        height: 48px;
+
+        margin-bottom: 5px;
+
+        font-size: 22px;
+    }
+
+    .card-cadastro h2 {
+        font-size: 31px;
+
+        margin-bottom: 3px;
+    }
+
+    .ornamento {
+        margin-bottom: 3px;
+    }
+
+    .subtitulo {
+        margin-bottom: 12px;
+    }
+
+    .formulario {
+        gap: 9px 18px;
+    }
+
+    .campo label {
+        margin-bottom: 3px;
+    }
+
+    .input-container {
+        height: 41px;
+    }
+
+    .btn-cadastrar,
+    .btn-google {
+        height: 41px;
+    }
+
+    .logo {
+        margin-bottom: 18px;
+    }
+
+    .descricao {
+        margin-bottom: 20px;
+    }
+
+    .mensagem {
+        padding: 11px 15px;
+    }
+
+    .icone-mensagem {
+        width: 43px;
+        height: 43px;
+
+        flex-basis: 43px;
+    }
+}
+
+@media (min-width: 851px) and (max-height: 700px) {
+
+    .cadastro-container {
+        padding: 12px 30px;
+
+        gap: 30px;
+    }
+
+    .card-cadastro {
+        padding: 13px 40px;
+    }
+
+    .icone-topo {
+        width: 40px;
+        height: 40px;
+
+        font-size: 19px;
+
+        margin-bottom: 3px;
+    }
+
+    .card-cadastro h2 {
+        font-size: 27px;
+    }
+
+    .subtitulo {
+        font-size: 13px;
+
+        margin-bottom: 9px;
+    }
+
+    .formulario {
+        gap: 7px 15px;
+    }
+
+    .campo label {
+        font-size: 12px;
+
+        margin-bottom: 2px;
+    }
+
+    .input-container {
+        height: 37px;
+    }
+
+    .input-container input {
+        font-size: 12px;
+    }
+
+    .input-icone {
+        font-size: 15px;
+    }
+
+    .btn-cadastrar,
+    .btn-google {
+        height: 37px;
+
+        font-size: 13px;
+    }
+
+    .termos {
+        font-size: 10px;
+    }
+
+    .login-link {
+        font-size: 11px;
+    }
+
+    .logo {
+        width: 170px;
+
+        margin-bottom: 12px;
+    }
+
+    .conteudo-esquerdo h1 {
+        font-size: 23px;
+
+        margin-bottom: 10px;
+    }
+
+    .descricao {
+        font-size: 12px;
+
+        margin-bottom: 15px;
+    }
+
+    .mensagem {
+        padding: 8px 12px;
+    }
+
+    .icone-mensagem {
+        width: 35px;
+        height: 35px;
+
+        flex-basis: 35px;
+
+        font-size: 17px;
+    }
+
+    .mensagem strong {
+        font-size: 12px;
+    }
+
+    .mensagem p {
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 1100px) {
+
+    .cadastro-container {
+        padding: 25px;
+
+        gap: 25px;
+    }
+
+    .lado-esquerdo {
+        width: 40%;
+
+        padding: 15px;
+    }
+
+    .lado-direito {
+        width: 60%;
+    }
+
+    .card-cadastro {
+        padding-left: 35px;
+        padding-right: 35px;
+    }
+
+    .conteudo-esquerdo h1 {
+        font-size: 30px;
+    }
+}
+
+@media (max-width: 850px) {
+
+    .cadastro-container {
+        flex-direction: column;
+
+        min-height: 100vh;
+
+        padding: 25px 20px;
+
+        gap: 25px;
+    }
+
+    .lado-esquerdo,
+    .lado-direito {
+        width: 100%;
+    }
+
+    .lado-esquerdo {
+        padding: 15px 0;
+    }
+
+    .lado-direito {
+        padding: 0;
+    }
+
+    .conteudo-esquerdo {
+        width: min(100%, 600px);
+    }
+
+    .logo {
+        width: 210px;
+    }
+
+    .conteudo-esquerdo h1 {
+        font-size: 29px;
+    }
+
+    .descricao {
+        margin-bottom: 25px;
+    }
+
+    .mensagem {
+        width: min(100%, 450px);
+    }
+
+    .card-cadastro {
+        width: 100%;
+
+        max-width: 750px;
+
+        padding: 30px 35px;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .cadastro-container {
+        padding: 20px 12px 30px;
+
+        gap: 20px;
+    }
+
+    .lado-esquerdo {
+        padding: 10px 0;
+    }
+
+    .logo {
+        width: 180px;
+    }
+
+    .conteudo-esquerdo h1 {
+        font-size: 25px;
+    }
+
+    .descricao {
+        font-size: 13px;
+    }
+
+    .mensagem {
+        padding: 12px;
+
+        gap: 10px;
+    }
+
+    .icone-mensagem {
+        width: 42px;
+        height: 42px;
+
+        flex-basis: 42px;
+
+        font-size: 20px;
+    }
+
+    .card-cadastro {
+        padding: 25px 18px;
+
+        border-radius: 22px;
+    }
+
+    .formulario {
+        grid-template-columns: 1fr;
+
+        gap: 15px;
+    }
+
+    .campo-completo,
+    .termos,
+    .btn-cadastrar,
+    .divisor,
+    .btn-google,
+    .login-link {
+        grid-column: 1;
+    }
+
+    .termos {
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 400px) {
+
+    .cadastro-container {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .logo {
+        width: 155px;
+    }
+
+    .conteudo-esquerdo h1 {
+        font-size: 22px;
+    }
+
+    .descricao {
+        font-size: 12px;
+    }
+
+    .mensagem {
+        display: none;
+    }
+
+    .card-cadastro {
+        padding: 22px 14px;
+    }
+
+    .card-cadastro h2 {
+        font-size: 28px;
+    }
+}

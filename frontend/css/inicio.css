@@ -1,0 +1,1170 @@
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    width: 100%;
+    min-height: 100dvh;
+
+    font-family: Georgia, "Times New Roman", serif;
+    color: #111;
+
+    overflow-x: hidden;
+
+    background-image: url("../assets/fundoInicio.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+
+/* =========================================================
+   PÁGINA
+========================================================= */
+
+.pagina-inicio {
+    width: 100%;
+    min-height: 100dvh;
+
+    padding:
+        clamp(18px, 3vw, 45px)
+        clamp(18px, 3vw, 55px)
+        clamp(25px, 4vw, 50px);
+}
+
+
+/* =========================================================
+   CABEÇALHO
+========================================================= */
+
+.cabecalho {
+    width: 100%;
+    min-height: clamp(55px, 6vw, 75px);
+
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: clamp(25px, 4vh, 45px);
+
+    z-index: 50;
+}
+
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.logo-link {
+    position: absolute;
+    left: 0;
+
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    width: clamp(100px, 10vw, 150px);
+    height: auto;
+}
+
+
+/* =========================================================
+   NAVBAR
+========================================================= */
+
+.navbar {
+    width: min(72%, 980px);
+    height: clamp(55px, 8vh, 75px);
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    overflow: hidden;
+
+    border: 1px solid rgba(255, 255, 255, 0.65);
+    border-radius: 100px;
+
+    background: rgba(255, 255, 255, 0.38);
+
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    box-shadow:
+        0 12px 30px rgba(0, 0, 0, 0.08);
+}
+
+
+/* =========================================================
+   LINKS
+========================================================= */
+
+.nav-link {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 8px;
+
+    border-radius: 100px;
+
+    color: #111;
+    text-decoration: none;
+
+    font-size: clamp(18px, 2.2vw, 32px);
+
+    white-space: nowrap;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.nav-link:hover {
+    background: rgba(255, 255, 255, 0.30);
+}
+
+.nav-link.ativo {
+    background: rgba(255, 255, 255, 0.55);
+}
+
+
+/* =========================================================
+   PERFIL
+========================================================= */
+
+.perfil-menu {
+    position: absolute;
+    right: 0;
+
+    width: clamp(50px, 5.5vw, 72px);
+}
+
+.perfil-menu summary {
+    list-style: none;
+}
+
+.perfil-menu summary::-webkit-details-marker {
+    display: none;
+}
+
+.botao-perfil {
+    width: clamp(50px, 5.5vw, 72px);
+    aspect-ratio: 1;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1.5px solid #111;
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.20);
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.botao-perfil:hover {
+    background: rgba(255, 255, 255, 0.45);
+    transform: scale(1.04);
+}
+
+
+/* =========================================================
+   ÍCONE PESSOA
+========================================================= */
+
+.icone-pessoa {
+    width: 55%;
+    height: 55%;
+
+    position: relative;
+}
+
+.icone-pessoa::before {
+    content: "";
+
+    position: absolute;
+
+    width: 38%;
+    aspect-ratio: 1;
+
+    top: 0;
+    left: 31%;
+
+    border-radius: 50%;
+
+    background: #000;
+}
+
+.icone-pessoa::after {
+    content: "";
+
+    position: absolute;
+
+    width: 78%;
+    height: 48%;
+
+    left: 11%;
+    bottom: 0;
+
+    border-radius: 55% 55% 30% 30%;
+
+    background: #000;
+}
+
+
+/* =========================================================
+   POPUP PERFIL
+========================================================= */
+
+.popup-perfil {
+    position: absolute;
+
+    top: calc(100% + 14px);
+    right: 0;
+
+    width: min(380px, calc(100vw - 30px));
+
+    padding: 24px;
+
+    border: 1px solid rgba(255, 255, 255, 0.65);
+    border-radius: 25px;
+
+    background: rgba(255, 255, 255, 0.68);
+
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.18);
+
+    animation: popupEntrada 0.2s ease;
+}
+
+@keyframes popupEntrada {
+
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* =========================================================
+   CABEÇALHO DO POPUP
+========================================================= */
+
+.popup-cabecalho {
+    display: flex;
+    align-items: center;
+
+    gap: 15px;
+
+    padding-bottom: 18px;
+    margin-bottom: 12px;
+
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.popup-cabecalho h2 {
+    font-size: 27px;
+    font-weight: normal;
+}
+
+.popup-cabecalho p {
+    margin-top: 3px;
+
+    font-size: 16px;
+
+    opacity: 0.65;
+}
+
+
+/* =========================================================
+   FOTO
+========================================================= */
+
+.foto-perfil {
+    width: clamp(75px, 8vw, 105px);
+    aspect-ratio: 1;
+
+    position: relative;
+
+    display: block;
+
+    flex-shrink: 0;
+
+    overflow: hidden;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.4);
+
+    cursor: pointer;
+}
+
+.imagem-foto-perfil {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+}
+
+.foto-perfil::after {
+    content: "📷";
+
+    position: absolute;
+    inset: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(0, 0, 0, 0.35);
+
+    color: white;
+
+    font-family: Arial, sans-serif;
+    font-size: 22px;
+
+    opacity: 0;
+
+    transition: opacity 0.2s ease;
+}
+
+.foto-perfil:hover::after {
+    opacity: 1;
+}
+
+
+/* =========================================================
+   OPÇÕES DO PERFIL
+========================================================= */
+
+.opcoes-perfil {
+    display: flex;
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+.opcao-perfil {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 12px 10px;
+
+    border: none;
+    border-radius: 14px;
+
+    background: transparent;
+
+    color: #111;
+
+    font-family: inherit;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.opcao-perfil:hover {
+    background: rgba(255, 255, 255, 0.35);
+}
+
+.opcao-perfil h3 {
+    font-size: 17px;
+    font-weight: normal;
+}
+
+.opcao-perfil p {
+    margin-top: 3px;
+
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+
+    opacity: 0.6;
+}
+
+.opcao-perfil > span {
+    font-family: Arial, sans-serif;
+    font-size: 25px;
+    opacity: 0.5;
+}
+
+.opcao-perfil.logooff {
+    margin-top: 5px;
+
+    border-top: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+
+/* =========================================================
+   CARD PRINCIPAL
+========================================================= */
+
+.card-principal {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(180px, 28%)
+        minmax(0, 1fr);
+
+    align-items: center;
+
+    gap: clamp(25px, 5vw, 70px);
+
+    padding:
+        clamp(25px, 4vw, 55px)
+        clamp(25px, 5vw, 70px);
+
+    border: 1px solid rgba(255, 255, 255, 0.65);
+    border-radius: clamp(30px, 4vw, 60px);
+
+    background: rgba(255, 255, 255, 0.30);
+
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.08);
+}
+
+
+/* =========================================================
+   PERFIL PRINCIPAL
+========================================================= */
+
+.perfil {
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: clamp(12px, 2vh, 22px);
+}
+
+.perfil .foto-perfil {
+    width: clamp(130px, 16vw, 260px);
+    height: auto;
+
+    aspect-ratio: 1;
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.username {
+    max-width: 100%;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    font-size: clamp(22px, 2.6vw, 38px);
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   PROGRESSO
+========================================================= */
+
+.progresso {
+    min-width: 0;
+
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: clamp(15px, 2.5vh, 30px);
+}
+
+.progresso-item {
+    width: 100%;
+}
+
+.progresso-titulo {
+    margin-bottom: 8px;
+
+    font-size: clamp(19px, 2.2vw, 32px);
+}
+
+
+/* =========================================================
+   BARRAS
+========================================================= */
+
+.barra {
+    width: 100%;
+    height: clamp(25px, 4vh, 42px);
+
+    padding: 4px;
+
+    border-radius: 100px;
+
+    background: rgba(255, 255, 255, 0.62);
+}
+
+.barra-preenchida {
+    height: 100%;
+
+    border-radius: 100px;
+
+    background: rgba(120, 135, 102, 0.62);
+}
+
+.barra-preenchida.aprendizagem {
+    width: 50%;
+}
+
+.barra-preenchida.colaboracao {
+    width: 30%;
+}
+
+
+/* =========================================================
+   BOTÃO FINANCEIRO
+========================================================= */
+
+.botao-financeiro {
+    width: 100%;
+    min-height: clamp(48px, 6vh, 68px);
+
+    border: none;
+    border-radius: 100px;
+
+    background: rgba(110, 120, 90, 0.38);
+
+    color: #111;
+
+    font-family: inherit;
+    font-size: clamp(19px, 2.2vw, 31px);
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.botao-financeiro:hover {
+    background: rgba(110, 120, 90, 0.52);
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   CARDS INFERIORES
+========================================================= */
+
+.cards-acoes {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    gap: clamp(15px, 4vw, 65px);
+
+    margin-top: clamp(18px, 3vh, 30px);
+}
+
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.card-acao {
+    min-width: 0;
+
+    min-height: clamp(190px, 28vh, 320px);
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: space-between;
+
+    padding:
+        clamp(22px, 3vw, 40px)
+        clamp(15px, 2.5vw, 30px);
+
+    border: 1px solid rgba(255, 255, 255, 0.65);
+    border-radius: clamp(25px, 3.5vw, 50px);
+
+    background: rgba(255, 255, 255, 0.30);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    box-shadow:
+        0 12px 30px rgba(0, 0, 0, 0.07);
+
+    text-align: center;
+}
+
+.card-acao h2 {
+    max-width: 100%;
+
+    font-size: clamp(17px, 2vw, 29px);
+
+    font-weight: normal;
+
+    line-height: 1.2;
+}
+
+.card-acao button {
+    width: min(80%, 210px);
+
+    min-height: clamp(42px, 5vh, 55px);
+
+    border: none;
+    border-radius: 100px;
+
+    background: rgba(110, 120, 90, 0.38);
+
+    color: #111;
+
+    font-family: inherit;
+
+    font-size: clamp(17px, 1.7vw, 25px);
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.card-acao button:hover {
+    background: rgba(110, 120, 90, 0.52);
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   MODAIS
+========================================================= */
+
+.modal {
+    position: fixed;
+    inset: 0;
+
+    z-index: 100;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 15px;
+
+    background: rgba(0, 0, 0, 0.25);
+
+    backdrop-filter: blur(7px);
+    -webkit-backdrop-filter: blur(7px);
+}
+
+.modal[hidden] {
+    display: none;
+}
+
+.modal-conteudo {
+    width: min(500px, calc(100vw - 30px));
+    max-height: calc(100dvh - 30px);
+
+    overflow-y: auto;
+
+    position: relative;
+
+    padding: clamp(22px, 4vw, 40px);
+
+    border-radius: 28px;
+
+    border: 1px solid rgba(255, 255, 255, 0.7);
+
+    background: rgba(255, 255, 255, 0.72);
+
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.20);
+}
+
+.modal-conteudo h2 {
+    margin-bottom: 10px;
+
+    font-size: clamp(24px, 3vw, 34px);
+
+    font-weight: normal;
+}
+
+.modal-conteudo > p {
+    margin-bottom: 18px;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   FECHAR
+========================================================= */
+
+.modal-fechar {
+    position: absolute;
+
+    top: 10px;
+    right: 12px;
+
+    width: 34px;
+    height: 34px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: rgba(0, 0, 0, 0.08);
+
+    font-family: Arial, sans-serif;
+    font-size: 24px;
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   FORMULÁRIOS
+========================================================= */
+
+.modal form {
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+.modal form label {
+    margin-top: 5px;
+
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+}
+
+.modal form input {
+    width: 100%;
+    height: 45px;
+
+    padding: 0 13px;
+
+    border: 1px solid rgba(0, 0, 0, 0.14);
+    border-radius: 13px;
+
+    outline: none;
+
+    background: rgba(255, 255, 255, 0.55);
+
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+
+.modal form input:focus {
+    border-color: rgba(80, 90, 60, 0.5);
+
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.modal form button {
+    width: 100%;
+    height: 46px;
+
+    margin-top: 10px;
+
+    border: none;
+    border-radius: 25px;
+
+    background: rgba(110, 120, 90, 0.5);
+
+    font-family: inherit;
+    font-size: 18px;
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   BOTÕES DO MODAL
+========================================================= */
+
+.acoes-modal {
+    display: flex;
+
+    gap: 10px;
+
+    margin-top: 15px;
+}
+
+.acoes-modal button {
+    flex: 1;
+
+    height: 45px;
+
+    border: none;
+    border-radius: 25px;
+
+    background: rgba(110, 120, 90, 0.45);
+
+    font-family: inherit;
+    font-size: 17px;
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .navbar {
+        width: 70%;
+    }
+
+    .card-principal {
+        grid-template-columns: 180px minmax(0, 1fr);
+
+        gap: 25px;
+    }
+
+    .perfil .foto-perfil {
+        width: 145px;
+    }
+
+    .cards-acoes {
+        gap: 15px;
+    }
+
+    .card-acao {
+        min-height: 220px;
+    }
+}
+
+
+/* =========================================================
+   TABLET PEQUENO / CELULAR
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .pagina-inicio {
+        padding:
+            15px
+            15px
+            25px;
+    }
+
+    .cabecalho {
+        justify-content: flex-start;
+
+        margin-bottom: 20px;
+    }
+
+    .logo-link {
+        display: none;
+    }
+
+    .navbar {
+        width: calc(100% - 60px);
+
+        height: 55px;
+    }
+
+    .nav-link {
+        font-size: clamp(15px, 3.5vw, 20px);
+    }
+
+    .perfil-menu {
+        width: 48px;
+    }
+
+    .botao-perfil {
+        width: 48px;
+    }
+
+
+    /* CARD PRINCIPAL */
+
+    .card-principal {
+        grid-template-columns: 1fr;
+
+        gap: 25px;
+
+        padding: 25px 20px;
+
+        border-radius: 30px;
+    }
+
+    .perfil {
+        flex-direction: row;
+    }
+
+    .perfil .foto-perfil {
+        width: 115px;
+    }
+
+    .username {
+        font-size: 25px;
+    }
+
+
+    /* PROGRESSO */
+
+    .progresso-titulo {
+        font-size: 20px;
+    }
+
+    .botao-financeiro {
+        font-size: 20px;
+    }
+
+
+    /* CARDS */
+
+    .cards-acoes {
+        grid-template-columns: 1fr;
+
+        gap: 15px;
+    }
+
+    .card-acao {
+        min-height: 190px;
+
+        border-radius: 28px;
+    }
+
+    .card-acao h2 {
+        font-size: 21px;
+    }
+
+    .card-acao button {
+        font-size: 19px;
+    }
+
+
+    /* POPUP */
+
+    .popup-perfil {
+        position: fixed;
+
+        top: 75px;
+        right: 15px;
+
+        width: calc(100vw - 30px);
+
+        max-height: calc(100dvh - 90px);
+
+        overflow-y: auto;
+    }
+}
+
+
+/* =========================================================
+   CELULAR PEQUENO
+========================================================= */
+
+@media (max-width: 450px) {
+
+    .navbar {
+        width: calc(100% - 55px);
+    }
+
+    .nav-link {
+        font-size: 14px;
+    }
+
+    .perfil .foto-perfil {
+        width: 95px;
+    }
+
+    .username {
+        font-size: 22px;
+    }
+
+    .progresso-titulo {
+        font-size: 18px;
+    }
+
+    .botao-financeiro {
+        min-height: 48px;
+
+        font-size: 18px;
+    }
+
+    .card-acao {
+        min-height: 175px;
+
+        padding: 20px 15px;
+    }
+
+    .card-acao h2 {
+        font-size: 19px;
+    }
+
+    .card-acao button {
+        min-height: 42px;
+
+        font-size: 17px;
+    }
+}
+
+
+/* =========================================================
+   JANELAS COM POUCA ALTURA
+========================================================= */
+
+@media (max-height: 650px) and (min-width: 701px) {
+
+    .pagina-inicio {
+        padding-top: 15px;
+        padding-bottom: 20px;
+    }
+
+    .cabecalho {
+        min-height: 50px;
+
+        margin-bottom: 18px;
+    }
+
+    .navbar {
+        height: 55px;
+    }
+
+    .card-principal {
+        padding-top: 20px;
+        padding-bottom: 20px;
+
+        gap: 25px;
+    }
+
+    .perfil .foto-perfil {
+        width: 125px;
+    }
+
+    .progresso {
+        gap: 12px;
+    }
+
+    .progresso-titulo {
+        margin-bottom: 5px;
+
+        font-size: 20px;
+    }
+
+    .barra {
+        height: 25px;
+    }
+
+    .botao-financeiro {
+        min-height: 45px;
+
+        font-size: 20px;
+    }
+
+    .cards-acoes {
+        margin-top: 15px;
+    }
+
+    .card-acao {
+        min-height: 170px;
+
+        padding: 18px;
+    }
+
+    .card-acao h2 {
+        font-size: 19px;
+    }
+
+    .card-acao button {
+        min-height: 40px;
+
+        font-size: 17px;
+    }
+}
+
+
+/* =========================================================
+   JANELA MUITO PEQUENA
+========================================================= */
+
+@media (max-height: 500px) {
+
+    .pagina-inicio {
+        padding-top: 10px;
+    }
+
+    .cabecalho {
+        margin-bottom: 12px;
+    }
+
+    .navbar {
+        height: 48px;
+    }
+
+    .card-principal {
+        padding: 15px;
+    }
+
+    .perfil .foto-perfil {
+        width: 90px;
+    }
+
+    .cards-acoes {
+        margin-top: 10px;
+    }
+
+    .card-acao {
+        min-height: 140px;
+
+        padding: 14px;
+    }
+}

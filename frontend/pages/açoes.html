@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Minhas Ações</title>
+
+    <link rel="stylesheet" href="../css/açoes.css">
+</head>
+
+<body>
+
+    <header class="navbar">
+
+        <nav class="nav-menu">
+
+            <a href="inicio.html" class="nav-link">
+                Início
+            </a>
+
+            <a href="açoes.html" class="nav-link active">
+                Ações
+            </a>
+
+            <a href="aprendizagem.html" class="nav-link">
+                Aprendizagem
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    <main class="acoes-container">
+
+        <section class="acoes-card">
+
+            <div class="acoes-header">
+
+                <div class="intro">
+
+                    <div class="titulo-area">
+
+                        <span class="titulo-icon">🌱</span>
+
+                        <div>
+
+                            <h1>Minhas Ações</h1>
+
+                            <p>
+                                Registre pequenas atitudes que você
+                                realizou hoje e faça a diferença!
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <button class="btn-registrar" type="button">
+
+                        <span class="btn-icon">+</span>
+
+                        Registrar ação
+
+                    </button>
+
+                </div>
+
+
+                <div class="resumo">
+
+                    <div class="resumo-titulo">
+
+                        <span>▣</span>
+
+                        <h2>Resumo de hoje</h2>
+
+                    </div>
+
+
+                    <div class="categorias">
+
+                        <article class="categoria agua">
+
+                            <span class="categoria-icon">💧</span>
+
+                            <strong>0</strong>
+
+                            <span>Água</span>
+
+                        </article>
+
+
+                        <article class="categoria residuos">
+
+                            <span class="categoria-icon">♻</span>
+
+                            <strong>0</strong>
+
+                            <span>Resíduos</span>
+
+                        </article>
+
+
+                        <article class="categoria natureza">
+
+                            <span class="categoria-icon">🌳</span>
+
+                            <strong>0</strong>
+
+                            <span>Natureza</span>
+
+                        </article>
+
+
+                        <article class="categoria mobilidade">
+
+                            <span class="categoria-icon">🚲</span>
+
+                            <strong>0</strong>
+
+                            <span>Mobilidade</span>
+
+                        </article>
+
+
+                        <article class="categoria energia">
+
+                            <span class="categoria-icon">⚡</span>
+
+                            <strong>0</strong>
+
+                            <span>Energia</span>
+
+                        </article>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <section class="historico">
+
+                <div class="historico-header">
+
+                    <div class="historico-titulo">
+
+                        <span>▣</span>
+
+                        <h2>Histórico de ações</h2>
+
+                    </div>
+
+
+                    <button class="filtro-data" type="button">
+
+                        <span>▣</span>
+
+                        <span>Filtrar por data</span>
+
+                        <span class="seta">⌄</span>
+
+                    </button>
+
+                </div>
+
+
+                <div class="tabela-container">
+
+                    <table class="tabela-acoes">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>Data</th>
+
+                                <th>Ação realizada</th>
+
+                                <th>Categoria</th>
+
+                                <th>Quantidade</th>
+
+                                <th>Impacto estimado</th>
+
+                                <th></th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="lista-acoes">
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+
+                <button class="ver-todas" type="button">
+
+                    <span>Ver todas as ações</span>
+
+                    <span class="ver-todas-icon">⌄</span>
+
+                </button>
+
+            </section>
+
+        </section>
+
+    </main>
+
+
+    <script src="../js/açoes.js"></script>
+
+</body>
+
+</html>

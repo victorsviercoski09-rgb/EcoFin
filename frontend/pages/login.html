@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>EcoFin | Login</title>
+
+    <link rel="stylesheet" href="../css/login.css">
+</head>
+
+<body>
+
+    <main class="login-page">
+
+        <div class="background"></div>
+
+        <section class="login-container">
+
+            <div class="login-brand">
+
+                <img src="../assets/logo.png" alt="Logo EcoFin" class="logo">
+
+                <h1>
+                    Pequenas ações hoje,
+                    <span>grandes transformações</span> amanhã.
+                </h1>
+
+                <div class="welcome-card">
+
+                    <div class="welcome-icon">
+                        <span>♧</span>
+                    </div>
+
+                    <div class="welcome-text">
+                        <h2>Bem-vindo de volta!</h2>
+
+                        <p>
+                            Faça login para continuar sua jornada
+                            por um futuro mais sustentável.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="login-card">
+
+                <div class="login-icon">
+                    <span>♧</span>
+                </div>
+
+                <h2 class="login-title">
+                    Entrar na sua conta
+                </h2>
+
+                <div class="decorative-divider">
+                    <span></span>
+                    <strong>Ø</strong>
+                    <span></span>
+                </div>
+
+                <form id="loginForm">
+
+                    <div class="form-group">
+
+                        <label for="email">
+                            E-mail ou usuário
+                        </label>
+
+                        <div class="input-container">
+
+                            <span class="input-icon">
+                                ✉
+                            </span>
+
+                            <input type="text" id="email" name="email" placeholder="Digite seu e-mail ou usuário"
+                                autocomplete="username" required>
+
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="senha">
+                            Senha
+                        </label>
+
+                        <div class="input-container">
+
+                            <span class="input-icon">
+                                🔒
+                            </span>
+
+                            <input type="password" id="senha" name="senha" placeholder="Digite sua senha"
+                                autocomplete="current-password" required>
+
+                            <button type="button" class="toggle-password" id="togglePassword"
+                                aria-label="Mostrar senha">
+                                ◉
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <div class="login-options">
+
+                        <label class="remember-me">
+
+                            <input type="checkbox" id="lembrar" name="lembrar" checked>
+
+                            <span>
+                                Lembrar de mim
+                            </span>
+
+                        </label>
+
+                        <a href="#" class="forgot-password">
+                            Esqueci minha senha
+                        </a>
+
+                    </div>
+
+                    <button type="submit" class="btn-login">
+                        <span>♧</span>
+                        Entrar
+                    </button>
+
+                </form>
+
+                <div class="or-divider">
+
+                    <span></span>
+
+                    <p>ou</p>
+
+                    <span></span>
+
+                </div>
+
+                <button type="button" class="btn-google" id="googleLogin">
+
+                    <span class="google-icon">
+                        G
+                    </span>
+
+                    <span>
+                        Entrar com Google
+                    </span>
+
+                </button>
+
+                <p class="register-text">
+
+                    Ainda não tem uma conta?
+
+                    <a href="../pages/cadastro.html">
+                        Cadastre-se
+                    </a>
+
+                </p>
+
+            </div>
+
+        </section>
+
+        <footer class="security-footer">
+
+            <span class="security-icon">
+                ♙
+            </span>
+
+            <span>
+                Seus dados estão protegidos com segurança
+            </span>
+
+        </footer>
+
+    </main>
+
+    <script src="../js/login.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>EcoFin - Início</title>
+
+    <link rel="stylesheet" href="../css/inicio.css">
+</head>
+
+<body>
+
+    <main class="pagina-inicio">
+
+        <!-- ==============================
+             CABEÇALHO
+        =============================== -->
+        <header class="cabecalho">
+
+            <!-- Logo -->
+            <a href="inicio.html" class="logo-link">
+                <img src="../assets/logo.png" alt="EcoFin" class="logo">
+            </a>
+
+
+            <!-- ==============================
+                 NAVBAR
+            =============================== -->
+            <nav class="navbar">
+
+                <a href="../pages/inicio.html" class="nav-link ativo">
+                    Início
+                </a>
+
+                <a href="../pages/açoes.html" class="nav-link">
+                    Ações
+                </a>
+
+                <a href="../pages/aprendizagem.html" class="nav-link">
+                    Aprendizagem
+                </a>
+
+            </nav>
+
+
+            <!-- ==============================
+                 PERFIL
+            =============================== -->
+            <details class="perfil-menu">
+
+                <summary class="botao-perfil" aria-label="Abrir perfil">
+                    <span class="icone-pessoa"></span>
+                </summary>
+
+
+                <!-- ==============================
+                     POPUP DO PERFIL
+                =============================== -->
+                <div class="popup-perfil">
+
+                    <!-- Cabeçalho do perfil -->
+                    <div class="popup-cabecalho">
+
+                        <!--
+                            Ao clicar nessa foto futuramente
+                            será possível trocar a foto.
+                        -->
+                        <label class="foto-perfil" for="input-foto-perfil" title="Alterar foto">
+
+                            <img src="../assets/logo.png" alt="Foto de perfil" class="imagem-foto-perfil"
+                                id="foto-perfil-popup">
+
+                            <input type="file" id="input-foto-perfil" accept="image/*" hidden>
+
+                        </label>
+
+
+                        <div>
+
+                            <h2>Perfil</h2>
+
+                            <p id="username-popup">
+                                Username
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ==============================
+                         OPÇÕES DO PERFIL
+                    =============================== -->
+                    <div class="opcoes-perfil">
+
+
+                        <!-- MUDAR NOME -->
+                        <button type="button" class="opcao-perfil" id="btn-mudar-nome">
+
+                            <div>
+
+                                <h3>
+                                    Mudar Nome Usuário
+                                </h3>
+
+                                <p>
+                                    Altere seu nome de usuário
+                                </p>
+
+                            </div>
+
+                            <span>›</span>
+
+                        </button>
+
+
+                        <!-- MUDAR SENHA -->
+                        <button type="button" class="opcao-perfil" id="btn-mudar-senha">
+
+                            <div>
+
+                                <h3>
+                                    Mudar Senha
+                                </h3>
+
+                                <p>
+                                    Altere a senha da sua conta
+                                </p>
+
+                            </div>
+
+                            <span>›</span>
+
+                        </button>
+
+
+                        <!-- SOBRE O SITE -->
+                        <button type="button" class="opcao-perfil" id="btn-sobre-site">
+
+                            <div>
+
+                                <h3>
+                                    Sobre o Site
+                                </h3>
+
+                                <p>
+                                    Saiba mais sobre o EcoFin
+                                </p>
+
+                            </div>
+
+                            <span>›</span>
+
+                        </button>
+
+
+                        <!-- LOGOFF -->
+                        <button type="button" class="opcao-perfil logooff" id="btn-logoff">
+
+                            <div>
+
+                                <h3>
+                                    Logoff
+                                </h3>
+
+                                <p>
+                                    Sair da sua conta
+                                </p>
+
+                            </div>
+
+                            <span>›</span>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </details>
+
+        </header>
+
+
+        <!-- ==============================
+             CARD PRINCIPAL
+        =============================== -->
+        <section class="card-principal">
+
+
+            <!-- ==============================
+                 PERFIL / PROGRESSO
+            =============================== -->
+            <div class="perfil">
+
+                <!--
+                    Essa foto também poderá ser
+                    alterada posteriormente.
+                -->
+                <label class="foto-perfil" for="input-foto-principal" title="Alterar foto">
+
+                    <img src="../assets/logo.png" alt="Foto de perfil" class="imagem-foto-perfil"
+                        id="foto-perfil-principal">
+
+                    <input type="file" id="input-foto-principal" accept="image/*" hidden>
+
+                </label>
+
+
+                <p class="username" id="username-principal">
+                    Username
+                </p>
+
+            </div>
+
+
+            <!-- ==============================
+                 PROGRESSO
+            =============================== -->
+            <div class="progresso">
+
+
+                <!-- NÍVEL APRENDIZAGEM -->
+                <div class="progresso-item">
+
+                    <p class="progresso-titulo">
+                        Nível Aprendizagem 2
+                    </p>
+
+                    <div class="barra">
+
+                        <div class="barra-preenchida aprendizagem"></div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- NÍVEL COLABORAÇÃO -->
+                <div class="progresso-item">
+
+                    <p class="progresso-titulo">
+                        Nível Colaboração 1
+                    </p>
+
+                    <div class="barra">
+
+                        <div class="barra-preenchida colaboracao"></div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- MODO FINANCEIRO -->
+                <button type="button" class="botao-financeiro" id="btn-modo-financeiro">
+                    Ativar Modo Financeiro
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==============================
+             CARDS INFERIORES
+        =============================== -->
+        <section class="cards-acoes">
+
+
+            <!-- ==============================
+                 CARD AÇÕES
+            =============================== -->
+            <article class="card-acao">
+
+                <h2>
+                    Bora Melhorar<br>
+                    Nosso Planeta
+                </h2>
+
+                <button type="button" id="btn-acoes">
+                    Saiba Mais
+                </button>
+
+            </article>
+
+
+            <!-- ==============================
+                 CARD APRENDIZAGEM
+            =============================== -->
+            <article class="card-acao">
+
+                <h2>
+                    Que tal Aprender a<br>
+                    Cuidar do nosso Planeta
+                </h2>
+
+                <button type="button" id="btn-aprendizagem">
+                    Eu Quero
+                </button>
+
+            </article>
+
+
+            <!-- ==============================
+                 CARD FINANCEIRO
+            =============================== -->
+            <article class="card-acao">
+
+                <h2>
+                    Quer Melhorar Finanças<br>
+                    Mas Não Sabe. Ative o<br>
+                    Modo Financeiro
+                </h2>
+
+                <button type="button" id="btn-financeiro">
+                    Ativar
+                </button>
+
+            </article>
+
+        </section>
+
+    </main>
+
+
+    <!-- ==================================================
+         MODAL - MUDAR NOME
+    =================================================== -->
+    <div class="modal" id="modal-mudar-nome" hidden>
+
+        <div class="modal-conteudo">
+
+            <button type="button" class="modal-fechar" data-fechar-modal aria-label="Fechar">
+                ×
+            </button>
+
+            <h2>
+                Mudar Nome de Usuário
+            </h2>
+
+            <p>
+                Digite o novo nome de usuário.
+            </p>
+
+            <form id="form-mudar-nome">
+
+                <label for="novo-username">
+                    Novo nome de usuário
+                </label>
+
+                <input type="text" id="novo-username" name="username" placeholder="Digite seu novo nome"
+                    autocomplete="username" required>
+
+                <button type="submit">
+                    Salvar
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- ==================================================
+         MODAL - MUDAR SENHA
+    =================================================== -->
+    <div class="modal" id="modal-mudar-senha" hidden>
+
+        <div class="modal-conteudo">
+
+            <button type="button" class="modal-fechar" data-fechar-modal aria-label="Fechar">
+                ×
+            </button>
+
+            <h2>
+                Mudar Senha
+            </h2>
+
+            <p>
+                Altere a senha utilizada para entrar na sua conta.
+            </p>
+
+            <form id="form-mudar-senha">
+
+                <label for="senha-atual">
+                    Senha atual
+                </label>
+
+                <input type="password" id="senha-atual" name="senha-atual" placeholder="Digite sua senha atual"
+                    autocomplete="current-password" required>
+
+
+                <label for="nova-senha">
+                    Nova senha
+                </label>
+
+                <input type="password" id="nova-senha" name="nova-senha" placeholder="Digite a nova senha"
+                    autocomplete="new-password" required>
+
+
+                <label for="confirmar-senha">
+                    Confirmar nova senha
+                </label>
+
+                <input type="password" id="confirmar-senha" name="confirmar-senha" placeholder="Confirme sua nova senha"
+                    autocomplete="new-password" required>
+
+
+                <button type="submit">
+                    Alterar Senha
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- ==================================================
+         MODAL - SOBRE O SITE
+    =================================================== -->
+    <div class="modal" id="modal-sobre-site" hidden>
+
+        <div class="modal-conteudo">
+
+            <button type="button" class="modal-fechar" data-fechar-modal aria-label="Fechar">
+                ×
+            </button>
+
+            <h2>
+                Sobre o EcoFin
+            </h2>
+
+            <p>
+                O EcoFin é um projeto criado para incentivar
+                a aprendizagem, a colaboração e a conscientização
+                sobre o meio ambiente.
+            </p>
+
+            <p>
+                Além disso, o site possui um modo financeiro
+                voltado para ajudar o usuário a desenvolver
+                conhecimentos básicos sobre finanças.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- ==================================================
+         MODAL - CONFIRMAÇÃO DE LOGOFF
+    =================================================== -->
+    <div class="modal" id="modal-logoff" hidden>
+
+        <div class="modal-conteudo">
+
+            <button type="button" class="modal-fechar" data-fechar-modal aria-label="Fechar">
+                ×
+            </button>
+
+            <h2>
+                Sair da conta?
+            </h2>
+
+            <p>
+                Tem certeza que deseja fazer logoff?
+            </p>
+
+            <div class="acoes-modal">
+
+                <button type="button" data-fechar-modal>
+                    Cancelar
+                </button>
+
+                <button type="button" id="confirmar-logoff">
+                    Sair
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ==================================================
+         JAVASCRIPT
+         
+         Vamos criar esse arquivo depois.
+    =================================================== -->
+    <script src="../js/inicio.js"></script>
+
+</body>
+
+</html>
