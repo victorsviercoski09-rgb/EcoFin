@@ -166,7 +166,7 @@ document.addEventListener("keydown", (event) => {
 });
 
 btnAcoes?.addEventListener("click", () => {
-    window.location.href = "acoes.html";
+    window.location.href = "açoes.html";
 });
 
 btnAprendizagem?.addEventListener("click", () => {

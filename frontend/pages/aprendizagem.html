@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoFin | Aprendizagem</title>
+
+    <link rel="stylesheet" href="../css/aprendizagem.css">
+    <link rel="stylesheet" href="../css/aprendizagem-referencia.css">
+</head>
+
+<body>
+    <header class="navbar">
+        <nav class="nav-menu" aria-label="Navegação principal">
+            <a href="../pages/inicio.html" class="nav-link">Início</a>
+            <a href="../pages/açoes.html" class="nav-link">Ações</a>
+            <a href="/pages/aprendizagem.html" class="nav-link active">
+                Aprendizagem
+            </a>
+        </nav>
+    </header>
+
+    <main class="aprendizagem-container">
+        <section class="introducao" aria-labelledby="titulo-principal">
+            <h1 id="titulo-principal">
+                Aprendizagem <span>🌱</span>
+            </h1>
+
+            <p>
+                Aprenda, pratique e transforme hábitos<br>
+                para um futuro mais <strong>sustentável.</strong>
+            </p>
+        </section>
+
+        <section class="grade-aprendizagem"
+            aria-label="Etapas de aprendizagem sobre reciclagem">
+
+            <article class="card-aprendizagem">
+                <span class="numero-card">01</span>
+
+                <div class="ilustracao-card planeta">🌎</div>
+
+                <h2>O que é<br>reciclagem?</h2>
+
+                <p>
+                    Entenda o conceito, a importância e os benefícios
+                    da reciclagem.
+                </p>
+
+                <button type="button" data-modal="conceito">
+                    Explorar <i>›</i>
+                </button>
+            </article>
+
+            <article class="card-aprendizagem">
+                <span class="numero-card">02</span>
+
+                <div class="ilustracao-card lixeiras">♻️</div>
+
+                <h2>Como separar<br>o lixo</h2>
+
+                <p>
+                    Aprenda a separar corretamente os resíduos e
+                    evitar erros comuns.
+                </p>
+
+                <button type="button" data-modal="separacao">
+                    Explorar <i>›</i>
+                </button>
+            </article>
+
+            <article class="card-aprendizagem">
+                <span class="numero-card">03</span>
+
+                <div class="ilustracao-card busca">🔎</div>
+
+                <h2>Onde cada material<br>deve ir?</h2>
+
+                <p>
+                    Descubra o destino certo para cada tipo de material
+                    e faça a escolha certa.
+                </p>
+
+                <button type="button" data-modal="guia">
+                    Explorar <i>›</i>
+                </button>
+            </article>
+
+            <article class="card-aprendizagem">
+                <span class="numero-card">04</span>
+
+                <div class="ilustracao-card reciclagem">♻️</div>
+
+                <h2>O que acontece<br>depois do descarte?</h2>
+
+                <p>
+                    Veja todo o processo: da coleta à transformação
+                    em novos produtos.
+                </p>
+
+                <button type="button" data-modal="processo">
+                    Explorar <i>›</i>
+                </button>
+            </article>
+
+            <article class="card-aprendizagem">
+                <span class="numero-card">05</span>
+
+                <div class="ilustracao-card quiz">💡</div>
+
+                <h2>Teste seus<br>conhecimentos</h2>
+
+                <p>
+                    Responda ao quiz, acerte as perguntas e se torne
+                    um expert.
+                </p>
+
+                <button type="button" data-modal="quiz">
+                    Explorar <i>›</i>
+                </button>
+            </article>
+        </section>
+    </main>
+
+    <dialog id="modal-aprendizagem"
+        class="modal vidro"
+        aria-labelledby="titulo-modal">
+
+        <button class="fechar"
+            type="button"
+            aria-label="Fechar pop-up">
+            ×
+        </button>
+
+        <div id="conteudo-modal"></div>
+    </dialog>
+
+    <script src="../js/aprendizagem.js"></script>
+</body>
+</html>
