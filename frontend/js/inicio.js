@@ -85,22 +85,15 @@ btnMudarSenha?.addEventListener("click", () => {
     document.getElementById("senha-atual")?.focus();
 });
 
-formMudarSenha?.addEventListener("submit", (event) => {
+formMudarSenha?.addEventListener("submit", async (event) => {
     event.preventDefault();
 
     const senhaAtual = document.getElementById("senha-atual").value;
     const novaSenha = document.getElementById("nova-senha").value;
     const confirmarSenha = document.getElementById("confirmar-senha").value;
 
-    const senhaSalva = localStorage.getItem("senha");
-
     if (!senhaAtual || !novaSenha || !confirmarSenha) {
         alert("Preencha todos os campos.");
-        return;
-    }
-
-    if (senhaSalva && senhaAtual !== senhaSalva) {
-        alert("A senha atual está incorreta.");
         return;
     }
 
@@ -109,20 +102,75 @@ formMudarSenha?.addEventListener("submit", (event) => {
         return;
     }
 
-    if (novaSenha.length < 6) {
-        alert("A nova senha deve ter pelo menos 6 caracteres.");
+    if (novaSenha.length < 8) {
+        alert("A nova senha deve ter pelo menos 8 caracteres.");
         return;
     }
 
-    localStorage.setItem("senha", novaSenha);
+    const armazenamentoUsuario = localStorage.getItem("ecofinUsuario") || sessionStorage.getItem("ecofinUsuario");
 
-    document.getElementById("senha-atual").value = "";
-    document.getElementById("nova-senha").value = "";
-    document.getElementById("confirmar-senha").value = "";
+    if (!armazenamentoUsuario) {
+        alert("Usuário não encontrado. Faça login novamente.");
+        return;
+    }
 
-    fecharModal(modalMudarSenha);
+    let usuario;
 
-    alert("Senha alterada com sucesso!");
+    try {
+        usuario = JSON.parse(armazenamentoUsuario);
+    } catch (erro) {
+        alert("Não foi possível identificar o usuário. Faça login novamente.");
+        return;
+    }
+
+    if (!usuario?.id) {
+        alert("Não foi possível identificar o usuário. Faça login novamente.");
+        return;
+    }
+
+    const botao = formMudarSenha.querySelector('button[type="submit"]');
+
+    try {
+        if (botao) {
+            botao.disabled = true;
+            botao.textContent = "Alterando...";
+        }
+
+        const resposta = await fetch("/api/usuarios/senha", {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                idUsuario: usuario.id,
+                senhaAtual,
+                novaSenha
+            })
+        });
+
+        const dados = await resposta.json();
+
+        if (!resposta.ok) {
+            alert(dados.mensagem || "Não foi possível alterar a senha.");
+            return;
+        }
+
+        document.getElementById("senha-atual").value = "";
+        document.getElementById("nova-senha").value = "";
+        document.getElementById("confirmar-senha").value = "";
+
+        fecharModal(modalMudarSenha);
+
+        alert("Senha alterada com sucesso!");
+    } catch (erro) {
+        console.error("Erro ao alterar senha:", erro);
+        alert("Não foi possível conectar ao servidor.");
+    } finally {
+        if (botao) {
+            botao.disabled = false;
+            botao.textContent = "Alterar senha";
+        }
+    }
 });
 
 btnSobreSite?.addEventListener("click", () => {
@@ -137,6 +185,8 @@ btnLogoff?.addEventListener("click", () => {
 
 confirmarLogoff?.addEventListener("click", () => {
     localStorage.removeItem("usuario");
+    localStorage.removeItem("ecofinUsuario");
+    sessionStorage.removeItem("ecofinUsuario");
     window.location.href = "login.html";
 });
 
@@ -229,6 +279,26 @@ inputFotoPopup?.addEventListener("change", () => {
 document.addEventListener("DOMContentLoaded", () => {
     const nomeSalvo = localStorage.getItem("username");
     const fotoSalva = localStorage.getItem("fotoPerfil");
+
+    const armazenamentoUsuario = localStorage.getItem("ecofinUsuario") || sessionStorage.getItem("ecofinUsuario");
+
+    if (!nomeSalvo && armazenamentoUsuario) {
+        try {
+            const usuario = JSON.parse(armazenamentoUsuario);
+
+            if (usuario?.usuario) {
+                if (usernamePrincipal) {
+                    usernamePrincipal.textContent = usuario.usuario;
+                }
+
+                if (usernamePopup) {
+                    usernamePopup.textContent = usuario.usuario;
+                }
+            }
+        } catch (erro) {
+            console.error("Erro ao carregar usuário:", erro);
+        }
+    }
 
     if (nomeSalvo) {
         if (usernamePrincipal) {
