@@ -10,7 +10,7 @@ body {
 }
 
 .navbar {
-    width: min(880px, calc(100% - 90px));
+    width: min(1080px, calc(100% - 90px));
     min-height: 76px;
 
     margin: 28px;
