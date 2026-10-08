@@ -1,25 +1,25 @@
 const express = require("express");
-const mysql = require("mysql2/promise");
+const Database = require("better-sqlite3");
 const cors = require("cors");
-const dotenv = require("dotenv");
 const bcrypt = require("bcrypt");
 const path = require("path");
-
-dotenv.config({ path: path.join(__dirname, ".env") });
 
 const app = express();
 const PORT = Number(process.env.PORT) || 3000;
 
-const db = mysql.createPool({
-    host: process.env.DB_HOST || "localhost",
-    port: Number(process.env.DB_PORT) || 3306,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
-    waitForConnections: true,
-    connectionLimit: 10,
-    queueLimit: 0
-});
+const db = new Database(path.join(__dirname, "ecofin.db"));
+db.pragma("journal_mode = WAL");
+
+db.exec(`
+    CREATE TABLE IF NOT EXISTS usuarios (
+        id_usuario INTEGER PRIMARY KEY AUTOINCREMENT,
+        nome_completo TEXT NOT NULL,
+        nome_usuario TEXT NOT NULL UNIQUE,
+        email TEXT NOT NULL UNIQUE,
+        senha_hash TEXT NOT NULL,
+        criado_em TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    )
+`);
 
 app.use(cors());
 app.use(express.json());
@@ -37,12 +37,12 @@ app.get("/", (req, res) => {
     res.redirect("/pages/cadastro.html");
 });
 
-app.get("/api/teste-db", async (req, res) => {
+app.get("/api/teste-db", (req, res) => {
     try {
-        await db.query("SELECT 1");
+        db.prepare("SELECT 1").get();
         res.json({ mensagem: "Banco de dados conectado." });
     } catch (erro) {
-        console.error("Erro ao conectar ao banco:", erro.message);
+        console.error("Erro ao conectar ao banco:", erro);
         res.status(500).json({ mensagem: "Não foi possível conectar ao banco de dados." });
     }
 });
@@ -61,15 +61,11 @@ app.post("/api/usuarios/cadastro", async (req, res) => {
             !textoValido(senha, 72) ||
             !textoValido(confirmarSenha, 72)
         ) {
-            return res.status(400).json({
-                mensagem: "Preencha todos os campos corretamente."
-            });
+            return res.status(400).json({ mensagem: "Preencha todos os campos corretamente." });
         }
 
         if (!/^\S+@\S+\.\S+$/.test(emailNormalizado)) {
-            return res.status(400).json({
-                mensagem: "Informe um e-mail válido."
-            });
+            return res.status(400).json({ mensagem: "Informe um e-mail válido." });
         }
 
         if (!/^[a-zA-Z0-9_.-]{3,30}$/.test(usuarioNormalizado)) {
@@ -79,55 +75,38 @@ app.post("/api/usuarios/cadastro", async (req, res) => {
         }
 
         if (senha.length < 8) {
-            return res.status(400).json({
-                mensagem: "A senha deve ter pelo menos 8 caracteres."
-            });
+            return res.status(400).json({ mensagem: "A senha deve ter pelo menos 8 caracteres." });
         }
 
         if (senha !== confirmarSenha) {
-            return res.status(400).json({
-                mensagem: "As senhas não coincidem."
-            });
+            return res.status(400).json({ mensagem: "As senhas não coincidem." });
         }
 
-        const [existente] = await db.execute(
-            "SELECT id_usuario FROM usuarios WHERE email = ? OR nome_usuario = ? LIMIT 1",
-            [emailNormalizado, usuarioNormalizado]
-        );
+        const existente = db
+            .prepare("SELECT id_usuario FROM usuarios WHERE email = ? OR nome_usuario = ? LIMIT 1")
+            .get(emailNormalizado, usuarioNormalizado);
 
-        if (existente.length > 0) {
-            return res.status(409).json({
-                mensagem: "E-mail ou nome de usuário já cadastrado."
-            });
+        if (existente) {
+            return res.status(409).json({ mensagem: "E-mail ou nome de usuário já cadastrado." });
         }
 
         const senhaHash = await bcrypt.hash(senha, 12);
 
-        const [resultado] = await db.execute(
-            `INSERT INTO usuarios (nome_completo, nome_usuario, email, senha_hash)
-             VALUES (?, ?, ?, ?)`,
-            [
-                nomeCompleto.trim(),
-                usuarioNormalizado,
-                emailNormalizado,
-                senhaHash
-            ]
-        );
+        const resultado = db
+            .prepare("INSERT INTO usuarios (nome_completo, nome_usuario, email, senha_hash) VALUES (?, ?, ?, ?)")
+            .run(nomeCompleto.trim(), usuarioNormalizado, emailNormalizado, senhaHash);
 
         res.status(201).json({
             mensagem: "Cadastro realizado com sucesso! Agora você pode entrar.",
             usuario: {
-                id: resultado.insertId,
+                id: Number(resultado.lastInsertRowid),
                 nome: nomeCompleto.trim(),
                 usuario: usuarioNormalizado
             }
         });
     } catch (erro) {
-        console.error("Erro no cadastro:", erro.message);
-
-        res.status(500).json({
-            mensagem: "Erro interno ao realizar o cadastro."
-        });
+        console.error("Erro no cadastro:", erro);
+        res.status(500).json({ mensagem: "Erro interno ao realizar o cadastro." });
     }
 });
 
@@ -136,30 +115,20 @@ app.post("/api/usuarios/login", async (req, res) => {
         const { identificador, senha } = req.body;
 
         if (!textoValido(identificador, 150) || !textoValido(senha, 72)) {
-            return res.status(400).json({
-                mensagem: "Informe seu e-mail ou usuário e sua senha."
-            });
+            return res.status(400).json({ mensagem: "Informe seu e-mail ou usuário e sua senha." });
         }
 
         const valor = identificador.trim();
 
-        const [usuarios] = await db.execute(
-            `SELECT id_usuario, nome_completo, nome_usuario, email, senha_hash
-             FROM usuarios
-             WHERE email = ? OR nome_usuario = ?
-             LIMIT 1`,
-            [
-                normalizarEmail(valor),
-                valor
-            ]
-        );
-
-        const usuario = usuarios[0];
+        const usuario = db
+            .prepare(`SELECT id_usuario, nome_completo, nome_usuario, email, senha_hash
+                      FROM usuarios
+                      WHERE email = ? OR nome_usuario = ?
+                      LIMIT 1`)
+            .get(normalizarEmail(valor), valor);
 
         if (!usuario || !(await bcrypt.compare(senha, usuario.senha_hash))) {
-            return res.status(401).json({
-                mensagem: "E-mail/usuário ou senha inválidos."
-            });
+            return res.status(401).json({ mensagem: "E-mail/usuário ou senha inválidos." });
         }
 
         res.json({
@@ -172,11 +141,8 @@ app.post("/api/usuarios/login", async (req, res) => {
             }
         });
     } catch (erro) {
-        console.error("Erro no login:", erro.message);
-
-        res.status(500).json({
-            mensagem: "Erro interno ao realizar o login."
-        });
+        console.error("Erro no login:", erro);
+        res.status(500).json({ mensagem: "Erro interno ao realizar o login." });
     }
 });
 
@@ -187,81 +153,44 @@ app.put("/api/usuarios/senha", async (req, res) => {
         const id = Number(idUsuario);
 
         if (!Number.isInteger(id) || id <= 0) {
-            return res.status(400).json({
-                mensagem: "Usuário inválido."
-            });
+            return res.status(400).json({ mensagem: "Usuário inválido." });
         }
 
-        if (
-            !textoValido(senhaAtual, 72) ||
-            !textoValido(novaSenha, 72)
-        ) {
-            return res.status(400).json({
-                mensagem: "Preencha todos os campos corretamente."
-            });
+        if (!textoValido(senhaAtual, 72) || !textoValido(novaSenha, 72)) {
+            return res.status(400).json({ mensagem: "Preencha todos os campos corretamente." });
         }
 
         if (novaSenha.length < 8) {
-            return res.status(400).json({
-                mensagem: "A nova senha deve ter pelo menos 8 caracteres."
-            });
+            return res.status(400).json({ mensagem: "A nova senha deve ter pelo menos 8 caracteres." });
         }
 
-        const [usuarios] = await db.execute(
-            `SELECT senha_hash
-             FROM usuarios
-             WHERE id_usuario = ?
-             LIMIT 1`,
-            [id]
-        );
-
-        const usuario = usuarios[0];
+        const usuario = db
+            .prepare("SELECT senha_hash FROM usuarios WHERE id_usuario = ? LIMIT 1")
+            .get(id);
 
         if (!usuario) {
-            return res.status(404).json({
-                mensagem: "Usuário não encontrado."
-            });
+            return res.status(404).json({ mensagem: "Usuário não encontrado." });
         }
 
-        const senhaAtualCorreta = await bcrypt.compare(
-            senhaAtual,
-            usuario.senha_hash
-        );
+        const senhaAtualCorreta = await bcrypt.compare(senhaAtual, usuario.senha_hash);
 
         if (!senhaAtualCorreta) {
-            return res.status(401).json({
-                mensagem: "A senha atual está incorreta."
-            });
+            return res.status(401).json({ mensagem: "A senha atual está incorreta." });
         }
 
         const novaSenhaHash = await bcrypt.hash(novaSenha, 12);
 
-        await db.execute(
-            `UPDATE usuarios
-             SET senha_hash = ?
-             WHERE id_usuario = ?`,
-            [
-                novaSenhaHash,
-                id
-            ]
-        );
+        db.prepare("UPDATE usuarios SET senha_hash = ? WHERE id_usuario = ?").run(novaSenhaHash, id);
 
-        res.json({
-            mensagem: "Senha alterada com sucesso!"
-        });
+        res.json({ mensagem: "Senha alterada com sucesso!" });
     } catch (erro) {
-        console.error("Erro ao alterar senha:", erro.message);
-
-        res.status(500).json({
-            mensagem: "Erro interno ao alterar a senha."
-        });
+        console.error("Erro ao alterar senha:", erro);
+        res.status(500).json({ mensagem: "Erro interno ao alterar a senha." });
     }
 });
 
 app.use((req, res) => {
-    res.status(404).json({
-        mensagem: "Rota não encontrada."
-    });
+    res.status(404).json({ mensagem: "Rota não encontrada." });
 });
 
 app.listen(PORT, () => {
