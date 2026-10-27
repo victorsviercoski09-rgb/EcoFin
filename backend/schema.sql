@@ -70,3 +70,39 @@ INSERT INTO categorias_ambientais (nome, descricao, icone) VALUES
 
 INSERT INTO unidades_medida (nome, sigla) VALUES
   ('quilograma', 'kg'), ('litro', 'L'), ('quilowatt-hora', 'kWh'), ('unidade', 'un'), ('quilômetro', 'km');
+
+CREATE TABLE IF NOT EXISTS sessoes_ecofin (
+ id_sessao BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+ id_usuario BIGINT UNSIGNED NOT NULL,
+ token_hash CHAR(64) NOT NULL UNIQUE,
+ expira_em DATETIME NOT NULL,
+ FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE CASCADE,
+ INDEX (id_usuario,expira_em)
+) ENGINE=InnoDB;
+CREATE TABLE IF NOT EXISTS perfil_financeiro (
+ id_usuario BIGINT UNSIGNED PRIMARY KEY,
+ renda_mensal DECIMAL(12,2) NOT NULL DEFAULT 0,
+ FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE CASCADE
+) ENGINE=InnoDB;
+CREATE TABLE IF NOT EXISTS ganhos (
+ id_ganho BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+ id_usuario BIGINT UNSIGNED NOT NULL,
+ descricao VARCHAR(150) NOT NULL,
+ categoria VARCHAR(60) NOT NULL,
+ valor DECIMAL(12,2) NOT NULL,
+ data_movimentacao DATE NOT NULL,
+ criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+ FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE CASCADE,
+ INDEX (id_usuario,data_movimentacao), CHECK (valor > 0)
+) ENGINE=InnoDB;
+CREATE TABLE IF NOT EXISTS gastos (
+ id_gasto BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+ id_usuario BIGINT UNSIGNED NOT NULL,
+ descricao VARCHAR(150) NOT NULL,
+ categoria VARCHAR(60) NOT NULL,
+ valor DECIMAL(12,2) NOT NULL,
+ data_movimentacao DATE NOT NULL,
+ criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+ FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE CASCADE,
+ INDEX (id_usuario,data_movimentacao), CHECK (valor > 0)
+) ENGINE=InnoDB;

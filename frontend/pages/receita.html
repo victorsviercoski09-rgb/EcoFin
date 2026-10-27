@@ -1,0 +1,142 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoFin | Receita</title>
+  <link rel="stylesheet" href="../css/receita.css">
+  <script src="../js/receita.js" defer></script>
+</head>
+<body>
+  <nav class="navbar">
+    <a href="inicioFinance.html" class="logo">
+      <span class="logo-mark"><i></i><i></i></span>
+      EcoFin
+    </a>
+    <div class="nav-links">
+      <a href="inicioFinance.html">Início</a>
+      <a class="active" href="receita.html">Receita</a>
+      <a href="simulador.html">Simulador</a>
+    </div>
+    <div class="avatar">VE</div>
+  </nav>
+
+  <main class="container">
+    <header class="page-header">
+      <div>
+        <h1>Receita</h1>
+        <p>Cadastre e acompanhe seus ganhos e gastos.</p>
+      </div>
+      <div class="header-actions">
+        <button class="btn-gasto" id="abrir-gasto">
+          <span>−</span> Cadastrar gasto
+        </button>
+        <button class="btn-ganho" id="abrir-ganho">
+          <span>+</span> Cadastrar ganho
+        </button>
+      </div>
+    </header>
+
+    <section class="cards">
+      <article class="card">
+        <div class="card-label"><i class="dot green"></i>Ganhos do mês</div>
+        <h2 id="ganhos-mes">R$ 0,00</h2>
+        <p id="ganhos-legenda">Nenhum ganho cadastrado</p>
+      </article>
+      <article class="card">
+        <div class="card-label"><i class="dot red"></i>Gastos do mês</div>
+        <h2 id="gastos-mes">R$ 0,00</h2>
+        <p id="gastos-legenda">Nenhum gasto cadastrado</p>
+      </article>
+      <article class="card">
+        <div class="card-label"><i class="dot blue"></i>Saldo do mês</div>
+        <h2 id="saldo-mes">R$ 0,00</h2>
+        <p>Ganhos menos gastos</p>
+      </article>
+    </section>
+
+    <section class="historico">
+      <div class="historico-header">
+        <h3>Ações cadastradas</h3>
+        <div class="filters">
+          <button class="active" data-filtro="tudo">Tudo</button>
+          <button data-filtro="receita">Ganhos</button>
+          <button data-filtro="gasto">Gastos</button>
+        </div>
+      </div>
+      <div id="lista-acoes" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <div class="modal-overlay" id="modal-overlay" hidden>
+    <section class="modal" role="dialog" aria-modal="true"
+             aria-labelledby="modal-titulo">
+      <button class="modal-close" id="fechar-modal"
+              aria-label="Fechar">×</button>
+
+      <div class="modal-heading">
+        <div class="modal-symbol" id="modal-symbol">↑</div>
+        <div>
+          <h2 id="modal-titulo">Cadastrar ganho</h2>
+          <p id="modal-subtitulo">Registre um novo valor recebido.</p>
+        </div>
+      </div>
+
+      <form id="form-movimentacao">
+        <label for="valor">Valor</label>
+        <div class="valor-wrapper">
+          <span>R$</span>
+          <input id="valor" name="valor" type="text"
+                 inputmode="decimal" placeholder="0,00" required>
+        </div>
+
+        <label for="descricao">Descrição</label>
+        <input id="descricao" name="descricao" type="text"
+               maxlength="150" placeholder="Ex.: Salário, freelance..."
+               required>
+
+        <label>Categoria</label>
+        <div id="categorias" class="categorias"></div>
+
+        <div class="form-grid">
+          <div>
+            <label for="data">Data</label>
+            <input id="data" name="data" type="date" required>
+          </div>
+          <div>
+            <label for="forma">Forma de recebimento</label>
+            <select id="forma" name="forma" required>
+              <option value="">Selecione</option>
+              <option value="Pix">Pix</option>
+              <option value="Dinheiro">Dinheiro</option>
+              <option value="Transferência">Transferência</option>
+              <option value="Cartão">Cartão</option>
+              <option value="Boleto">Boleto</option>
+              <option value="Outros">Outros</option>
+            </select>
+          </div>
+        </div>
+
+        <label class="recorrente-box" for="recorrente">
+          <span>
+            <strong id="recorrente-titulo">Ganho recorrente</strong>
+            <small>Repetir todo mês automaticamente</small>
+          </span>
+          <input id="recorrente" type="checkbox">
+          <span class="switch"></span>
+        </label>
+
+        <p id="form-erro" class="form-erro" role="alert"></p>
+
+        <div class="modal-actions">
+          <button type="button" class="btn-cancelar"
+                  id="cancelar-modal">Cancelar</button>
+          <button type="submit" class="btn-salvar"
+                  id="salvar-movimentacao">Salvar ganho</button>
+        </div>
+      </form>
+    </section>
+  </div>
+</body>
+</html>

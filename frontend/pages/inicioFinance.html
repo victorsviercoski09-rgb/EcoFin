@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoFin | Início</title>
+    <link rel="stylesheet" href="../css/inicioFinance.css">
+    <script src="../js/inicioFinance.js" defer></script>
+</head>
+
+<body>
+    <nav class="navbar">
+        <a class="logo" href="inicioFinance.html">
+            <span class="logo-mark">
+                <i></i><i></i>
+            </span>
+            EcoFin
+        </a>
+
+        <div class="nav-links">
+            <a class="active" href="inicioFinance.html">Início</a>
+            <a href="receita.html">Receita</a>
+            <a href="simulador.html">Simulador</a>
+        </div>
+
+        <div class="avatar">VE</div>
+    </nav>
+
+    <main class="container">
+        <header class="welcome">
+            <div>
+                <h1>Olá, <span id="nome-usuario">Victor Eduardo</span>!</h1>
+                <p>Aqui está um resumo da sua vida financeira.</p>
+            </div>
+
+            <a href="inicio.html" class="ambiental">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 4c-9 0-15 3-15 11a5 5 0 0 0 5 5c8 0 11-6 10-16Z" />
+                    <path d="M4 21c2-6 6-10 12-13" />
+                </svg>
+                Modo Ambiental
+            </a>
+        </header>
+
+        <section class="cards">
+            <article class="card">
+                <div class="card-label">
+                    <span class="dot blue"></span>
+                    Renda mensal
+                </div>
+                <h2 id="renda-mensal">R$ 0,00</h2>
+                <p>Registrada na seção Receita.</p>
+            </article>
+
+            <article class="card">
+                <div class="card-label">
+                    <span class="dot green"></span>
+                    Saldo disponível
+                </div>
+                <h2 id="saldo-disponivel">R$ 0,00</h2>
+                <p>Com base na sua renda e registros.</p>
+            </article>
+        </section>
+
+        <section class="movimentacoes">
+            <div class="mov-header">
+                <h3>Movimentações recentes</h3>
+
+                <div class="filters">
+                    <button class="selected" data-filtro="tudo">Tudo</button>
+                    <button data-filtro="receita">Receitas</button>
+                    <button data-filtro="gasto">Gastos</button>
+                </div>
+            </div>
+
+            <div id="lista-movimentacoes">
+                <div class="empty-state">
+                    <div class="empty-icon">
+                        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor"
+                            stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z" />
+                            <path d="M14 2v6h6" />
+                            <path d="M8 13h8M8 17h6" />
+                        </svg>
+                    </div>
+                    <h4>Nenhuma movimentação ainda</h4>
+                    <p>Suas receitas e seus gastos vão aparecer aqui assim<br>
+                        que forem cadastrados.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>
