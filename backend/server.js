@@ -1,4 +1,3 @@
-
 const express = require("express");
 const mysql = require("mysql2/promise");
 const cors = require("cors");
@@ -75,7 +74,6 @@ async function autenticar(req, res, next) {
 
         req.usuarioId = sessoes[0].id_usuario;
         next();
-
     } catch (erro) {
         console.error("Erro de autenticação:", erro);
 
@@ -98,7 +96,6 @@ app.get("/api/teste-db", async (req, res) => {
         res.json({
             mensagem: "Banco de dados conectado."
         });
-
     } catch (erro) {
         console.error("Erro ao conectar ao banco:", erro.message);
 
@@ -145,7 +142,8 @@ app.post("/api/usuarios/cadastro", async (req, res) => {
 
         if (!/^[a-zA-Z0-9_.-]{3,30}$/.test(usuarioNormalizado)) {
             return res.status(400).json({
-                mensagem: "O usuário deve ter 3 a 30 caracteres e usar apenas letras, números, ponto, hífen ou sublinhado."
+                mensagem:
+                    "O usuário deve ter 3 a 30 caracteres e usar apenas letras, números, ponto, hífen ou sublinhado."
             });
         }
 
@@ -190,14 +188,14 @@ app.post("/api/usuarios/cadastro", async (req, res) => {
         );
 
         res.status(201).json({
-            mensagem: "Cadastro realizado com sucesso! Agora você pode entrar.",
+            mensagem:
+                "Cadastro realizado com sucesso! Agora você pode entrar.",
             usuario: {
                 id: resultado.insertId,
                 nome: nomeCompleto.trim(),
                 usuario: usuarioNormalizado
             }
         });
-
     } catch (erro) {
         console.error("Erro no cadastro:", erro.message);
 
@@ -247,7 +245,6 @@ app.post("/api/usuarios/login", async (req, res) => {
             });
         }
 
-        // Cria uma sessão válida por 7 dias.
         const token = crypto.randomBytes(32).toString("hex");
 
         await db.execute(
@@ -267,7 +264,6 @@ app.post("/api/usuarios/login", async (req, res) => {
                 email: usuario.email
             }
         });
-
     } catch (erro) {
         console.error("Erro no login:", erro.message);
 
@@ -354,7 +350,6 @@ app.put("/api/usuarios/senha", async (req, res) => {
         res.json({
             mensagem: "Senha alterada com sucesso! Faça login novamente."
         });
-
     } catch (erro) {
         console.error("Erro ao alterar senha:", erro.message);
 
@@ -364,8 +359,94 @@ app.put("/api/usuarios/senha", async (req, res) => {
     }
 });
 
-// ROTAS FINANCEIRAS
-// Devem ficar antes do tratamento de erro 404.
+// Rota do dashboard
+app.get("/api/dashboard", autenticar, async (req, res) => {
+    try {
+        const usuarioId = req.usuarioId;
+
+        const [perfil] = await db.execute(
+            `SELECT renda_mensal
+             FROM perfil_financeiro
+             WHERE id_usuario = ?
+             LIMIT 1`,
+            [usuarioId]
+        );
+
+        const [totais] = await db.execute(
+            `SELECT
+                (
+                    SELECT COALESCE(SUM(valor), 0)
+                    FROM ganhos
+                    WHERE id_usuario = ?
+                      AND data_movimentacao >=
+                          DATE_FORMAT(CURDATE(), '%Y-%m-01')
+                      AND data_movimentacao <
+                          DATE_FORMAT(
+                              CURDATE() + INTERVAL 1 MONTH,
+                              '%Y-%m-01'
+                          )
+                ) AS ganhosMes,
+                (
+                    SELECT COALESCE(SUM(valor), 0)
+                    FROM gastos
+                    WHERE id_usuario = ?
+                      AND data_movimentacao >=
+                          DATE_FORMAT(CURDATE(), '%Y-%m-01')
+                      AND data_movimentacao <
+                          DATE_FORMAT(
+                              CURDATE() + INTERVAL 1 MONTH,
+                              '%Y-%m-01'
+                          )
+                ) AS gastosMes`,
+            [usuarioId, usuarioId]
+        );
+
+        const [movimentacoes] = await db.execute(
+            `SELECT
+                'receita' AS tipo,
+                id_ganho AS id,
+                descricao,
+                categoria,
+                valor,
+                DATE_FORMAT(data_movimentacao, '%Y-%m-%d') AS data
+             FROM ganhos
+             WHERE id_usuario = ?
+
+             UNION ALL
+
+             SELECT
+                'gasto' AS tipo,
+                id_gasto AS id,
+                descricao,
+                categoria,
+                valor,
+                DATE_FORMAT(data_movimentacao, '%Y-%m-%d') AS data
+             FROM gastos
+             WHERE id_usuario = ?
+
+             ORDER BY data DESC, id DESC
+             LIMIT 10`,
+            [usuarioId, usuarioId]
+        );
+
+        const ganhosMes = Number(totais[0].ganhosMes);
+        const gastosMes = Number(totais[0].gastosMes);
+
+        res.json({
+            rendaMensal: Number(perfil[0]?.renda_mensal ?? ganhosMes),
+            saldoDisponivel: ganhosMes - gastosMes,
+            movimentacoes
+        });
+    } catch (erro) {
+        console.error("Erro no dashboard:", erro);
+
+        res.status(500).json({
+            mensagem: "Erro ao carregar dashboard."
+        });
+    }
+});
+
+// Rotas financeiras
 const criarReceitaRouter = require("./routes/receitaRoutes");
 
 app.use(

@@ -71,8 +71,12 @@ function renderizarMovimentacoes() {
 
 async function carregarDashboard() {
   try {
+    const token = localStorage.getItem("ecofin_token");
+
     const resposta = await fetch("/api/dashboard", {
-      credentials: "same-origin"
+      headers: token
+        ? { Authorization: `Bearer ${token}` }
+        : {}
     });
 
     if (!resposta.ok) {
@@ -89,7 +93,6 @@ async function carregarDashboard() {
       : [];
 
     renderizarMovimentacoes();
-
   } catch (erro) {
     console.error("Erro ao carregar EcoFin:", erro);
 
